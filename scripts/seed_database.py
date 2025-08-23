@@ -8,7 +8,7 @@ import os
 import sys
 import json
 import argparse
-from pathlib import path
+from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -40,7 +40,7 @@ class SyllablePattern(Base):
     __tablename__ = 'syllable_patterns'
 
     id = Column(Integer, primary_key=True)
-    culture_id = Column(Integer, ForeignKey('cultures_id'), nullable=False)
+    culture_id = Column(Integer, ForeignKey('cultures.id'), nullable=False)
     pattern_type = Column(String(20), nullable=False) # 'initial', 'medial', 'final'
     pattern = Column(String(20), nullable=False) # 'cv', 'cvc', 'vc', etc
     weight = Column(Float, default=1.0) # probability weight for random selection
@@ -55,9 +55,9 @@ class GeneratedName(Base):
     name = Column(String(50), nullable=False)
     culture_id = Column(Integer, ForeignKey('cultures.id'), nullable=False)
     gender = Column(String(20))
-    pronounciation = Column(String(100))
+    pronunciation = Column(String(100))
     syllables = Column(JSON) # syllable components
-    score = Column(Float) # pronounciation
+    score = Column(Float) # pronunciation
     parameters = Column(JSON)
     usage_count = Column(Integer, default=0)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -347,7 +347,7 @@ def seed_cultures(session: Session, verbose: bool = False):
     for name, code, description, config in cultures:
         existing = session.query(Culture).filter_by(code=code).first()
 
-        if existin:
+        if existing:
             if verbose:
                 print(f" - Culture '{name}' already exists, updating...")
             existing.config = config
@@ -434,7 +434,7 @@ def seed_sample_names(session: Session, culture_ids: Dict[str, int], verbose: bo
             for name, syllables, score in names:
                 existing = session.query(GeneratedName).filter_by(
                     name=name,
-                    culture_id=culture_ids
+                    culture_id=culture_id
                 ).first()
 
                 if not existing:
