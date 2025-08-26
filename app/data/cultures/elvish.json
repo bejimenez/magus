@@ -1,0 +1,33 @@
+{
+    "name": "Elvish",
+    "code": "elv",
+    "description": "Flowing, melodic names with soft consonants",
+    "consonants": "lmnrsvwy",
+    "vowels": "aeiouy",
+    "liquids": "lr",
+    "nasals": "mn",
+    "sibilants": "s",
+    "patterns": {
+        "initial": ["V", "CV", "LV"],
+        "medial": ["CV", "V", "LV"],
+        "final": ["V", "VC", "VL", "VN"]
+    },
+    "gender_patterns": {
+        "feminine": {
+            "initial": ["V", "LV"],
+            "final": ["V", "VL"]
+        },
+        "masculine": {
+            "initial": ["CV", "CVC"],
+            "final": ["VC", "VN"]
+        }
+    },
+    "transforms": {
+        "double_l": "ll->l",
+        "double_n": "nn->n"
+    },
+    "forbidden_initial": ["y", "w"],
+    "forbidden_final": ["w"],
+    "forbidden_clusters": ["ml", "nm", "sr"],
+    "example_names": ["Lyralei", "Aelion", "Silvain", "Elowen"]
+}
