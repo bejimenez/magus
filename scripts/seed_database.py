@@ -417,7 +417,7 @@ def seed_sample_names(session: Session, culture_ids: Dict[str, int], verbose: bo
                         gender=gender if gender != "neutral" else None,
                         pronunciation="-".join(s.lower() for s in syllables),
                         syllables=syllables,
-                        score=0.9 # high score for examples
+                        score=0.9, # high score for examples
                         parameters={"seed": True, "source": "examples"},
                         usage_count=0
                     )
