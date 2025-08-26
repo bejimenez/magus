@@ -1,33 +1,99 @@
 {
-    "name": "Elvish",
-    "code": "elv",
-    "description": "Flowing, melodic names with soft consonants",
+  "name": "Elvish",
+  "code": "elv",
+  "description": "Flowing, melodic names with soft consonants and vowel harmony",
+  
+  "phonemes": {
     "consonants": "lmnrsvwy",
     "vowels": "aeiouy",
     "liquids": "lr",
     "nasals": "mn",
-    "sibilants": "s",
-    "patterns": {
-        "initial": ["V", "CV", "LV"],
-        "medial": ["CV", "V", "LV"],
-        "final": ["V", "VC", "VL", "VN"]
+    "sibilants": "s"
+  },
+  
+  "syllable_patterns": {
+    "initial": [
+      {"pattern": "V", "weight": 2.0},
+      {"pattern": "CV", "weight": 3.0},
+      {"pattern": "LV", "weight": 2.5}
+    ],
+    "medial": [
+      {"pattern": "CV", "weight": 3.0},
+      {"pattern": "V", "weight": 1.0},
+      {"pattern": "LV", "weight": 2.0},
+      {"pattern": "CVC", "weight": 1.5}
+    ],
+    "final": [
+      {"pattern": "V", "weight": 2.5},
+      {"pattern": "VC", "weight": 1.5},
+      {"pattern": "VL", "weight": 2.0},
+      {"pattern": "VN", "weight": 1.8}
+    ]
+  },
+  
+  "gender_patterns": {
+    "feminine": {
+      "initial": [
+        {"pattern": "V", "weight": 3.0},
+        {"pattern": "LV", "weight": 2.5}
+      ],
+      "final": [
+        {"pattern": "V", "weight": 3.0},
+        {"pattern": "VL", "weight": 2.5}
+      ]
     },
-    "gender_patterns": {
-        "feminine": {
-            "initial": ["V", "LV"],
-            "final": ["V", "VL"]
-        },
-        "masculine": {
-            "initial": ["CV", "CVC"],
-            "final": ["VC", "VN"]
-        }
-    },
-    "transforms": {
-        "double_l": "ll->l",
-        "double_n": "nn->n"
-    },
+    "masculine": {
+      "initial": [
+        {"pattern": "CV", "weight": 3.0},
+        {"pattern": "CVC", "weight": 2.0}
+      ],
+      "final": [
+        {"pattern": "VC", "weight": 2.0},
+        {"pattern": "VN", "weight": 2.0}
+      ]
+    }
+  },
+  
+  "constraints": {
+    "forbidden_clusters": ["ml", "nm", "sr", "wr"],
     "forbidden_initial": ["y", "w"],
     "forbidden_final": ["w"],
-    "forbidden_clusters": ["ml", "nm", "sr"],
-    "example_names": ["Lyralei", "Aelion", "Silvain", "Elowen"]
+    "max_consonant_cluster": 2,
+    "vowel_harmony": true
+  },
+  
+  "style": {
+    "prefer_vowel_endings": true,
+    "ideal_syllable_count": 3,
+    "length_range": {
+      "min": 3,
+      "max": 12,
+      "ideal": 7
+    }
+  },
+  
+  "morphology": {
+    "prefixes": {
+      "masculine": ["Ael", "El", "Gal", "Fin"],
+      "feminine": ["Ara", "Ela", "Lyr", "Sil"],
+      "neutral": ["Val", "Cel", "Mir"]
+    },
+    "suffixes": {
+      "masculine": ["ion", "dir", "las", "orn"],
+      "feminine": ["iel", "wen", "eth", "yn"],
+      "neutral": ["ar", "in", "el"]
+    }
+  },
+  
+  "transforms": {
+    "double_l": "ll→l",
+    "double_n": "nn→n",
+    "double_vowel": "aa→a"
+  },
+  
+  "examples": {
+    "masculine": ["Elrond", "Legolas", "Thranduil", "Finarfin"],
+    "feminine": ["Arwen", "Galadriel", "Nimrodel", "Elaria"],
+    "neutral": ["Celeborn", "Mithrandir"]
+  }
 }
